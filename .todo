@@ -1,0 +1,15 @@
+ETAPP1:
+  ☐ koordinaatide sisestamine
+  ☐ näita koordinaatide abil infot päikesetõusu ja -loojangu kohta
+
+ETAPP2:
+  ☐ kaardi integratsioon (mapbox, openstreet vmt)
+  ☐ kuva sisestatud koordinaate kaardil
+  ☐ koordinaatide valimine kaardilt
+
+ETAPP3:
+  kuupäevade vahemiku sisestamine:
+    ☐ Svelte datetime picker
+  graafik:
+    ☐ API, millele sobib kuupäevade vahemik
+    ☐ graafiku joonistamine (D3, Google Charts, ChartJS vmt?)
