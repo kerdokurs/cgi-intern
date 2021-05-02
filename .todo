@@ -3,7 +3,7 @@ ETAPP1:
   ☐ näita koordinaatide abil infot päikesetõusu ja -loojangu kohta
 
 ETAPP2:
-  ☐ kaardi integratsioon (mapbox, openstreet vmt)
+  ✔ kaardi integratsioon (mapbox, openstreet vmt) @done(21-05-02 10:45)
   ☐ kuva sisestatud koordinaate kaardil
   ☐ koordinaatide valimine kaardilt
 

@@ -1,18 +1,21 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import Map from './lib/map.svelte';
+  import Sidebar from './lib/sidebar.svelte';
 
-  let number: number = 0;
+  let lat: number = 0;
+  let lng: number = 0;
 
-  onMount(() => {
-    const interval = setInterval(() => number++, 1000);
-
-    return () => clearInterval(interval);
-  });
+  // Map click handler
+  const onClick = (e: any) => {
+    const { lng: _lng, lat: _lat } = e.detail;
+    lat = _lat;
+    lng = _lng;
+  };
 </script>
 
-<main class="text-center w-screen h-screen flex flex-col justify-center">
-  <h1 class="text-4xl">CGI internship task</h1>
-  <p>The page has been opened for {number} seconds</p>
+<main class="text-center w-screen h-screen grid grid-cols-12">
+  <Map on:click={onClick} />
+  <Sidebar bind:lat bind:lng />
 </main>
 
 <style lang="postcss">
