@@ -5,9 +5,12 @@
     "test": "web-test-runner \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "@mapbox/timespace": "^2.0.4",
+    "@carbon/charts": "^0.41.62",
+    "@carbon/charts-svelte": "^0.41.62",
     "@snowpack/plugin-postcss": "^1.2.2",
     "autoprefixer": "^10.2.5",
+    "carbon-components": "^10.34.0",
+    "d3": "^5.16.0",
     "dayjs": "^1.10.4",
     "mapbox-gl": "^2.2.0",
     "suncalc": "^1.8.0",

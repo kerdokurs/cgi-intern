@@ -35,6 +35,7 @@ export const calculate = (
     sunrise,
     sunset,
     length,
+    date: new Date(date),
   };
 };
 
@@ -60,8 +61,9 @@ export const calculateRange = (
     const current = start;
     current <= end;
     current.setDate(current.getDate() + 1)
-  )
+  ) {
     data.push(calculate(current, lat, lng, timezone));
+  }
 
   return data;
 };

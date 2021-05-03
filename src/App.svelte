@@ -16,6 +16,13 @@
   };
 </script>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@carbon/charts/styles.min.css"
+  />
+</svelte:head>
+
 <main class="w-screen h-screen flex flex-row">
   <Sidebar on:go={onGo} bind:lat bind:lng />
   <Map bind:lat bind:lng bind:update={updateMap} />

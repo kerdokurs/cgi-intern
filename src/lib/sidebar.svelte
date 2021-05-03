@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { calculate } from './calc';
   import type Data from './Data';
-  import Graph from './graph.svelte';
+  import Chart from './chart.svelte';
   import Info from './info.svelte';
   import type Timezone from './Timezone';
   import timezones from './timezones';
@@ -14,6 +14,7 @@
 
   let showRange: boolean = false;
   let startDate: number = new Date().getTime();
+  let endDate: number = new Date().getTime();
 
   let timezone: Timezone = timezones[0];
 
@@ -43,12 +44,7 @@
 
       {#if showRange}
         <label for="end"> Lõppkuupäev </label>
-        <input
-          type="datetime-local"
-          name="end"
-          id="end"
-          bind:value={startDate}
-        />
+        <input type="datetime-local" name="end" id="end" bind:value={endDate} />
       {/if}
 
       <p class="col-span-2 text-right text-xs">
@@ -61,10 +57,10 @@
       </p>
 
       <label for="lat"> Laiuskraad </label>
-      <input type="number" name="lat" id="lat" bind:value={lat} />
+      <input type="decimal" name="lat" id="lat" bind:value={lat} />
 
       <label for="lng"> Pikkuskraad </label>
-      <input type="number" name="lng" id="lng" bind:value={lng} />
+      <input type="decimal" name="lng" id="lng" bind:value={lng} />
 
       <label for="timezone"> Ajavöönd </label>
       <select name="timezone" id="timezone" bind:value={timezone}>
@@ -82,7 +78,7 @@
   </form>
 
   {#if showRange}
-    <Graph />
+    <Chart bind:lng bind:lat {startDate} {endDate} bind:timezone />
   {:else}
     <Info {...data} />
   {/if}
