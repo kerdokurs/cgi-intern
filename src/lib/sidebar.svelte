@@ -1,9 +1,9 @@
 <script>
-  import dayjs from 'dayjs';
-
   import { createEventDispatcher } from 'svelte';
   import { calculate } from './calc';
   import type Data from './Data';
+  import Graph from './graph.svelte';
+  import Info from './info.svelte';
   import type Timezone from './Timezone';
   import timezones from './timezones';
 
@@ -28,8 +28,8 @@
 </script>
 
 <div class="w-2/5 py-20 px-4 flex flex-col gap-4">
-  <h1 class="text-3xl font-bold">Päeva pikkuse kalkulaator</h1>
-  <h2 class="text-xl">Sisesta koordinaadid või vali asukoht kaardilt</h2>
+  <h1 class="text-2xl font-bold">Päeva pikkuse kalkulaator</h1>
+  <h2 class="text-lg">Sisesta koordinaadid või vali asukoht kaardilt</h2>
 
   <form on:submit|preventDefault={go}>
     <div class="text-left grid grid-cols-2 gap-2">
@@ -81,12 +81,10 @@
     </button>
   </form>
 
-  {#if data}
-    <div>
-      <p>Päikesetõus: {data.sunrise.format('HH:mm:ssZ')}</p>
-      <p>Päikeseloojang: {data.sunset.format('HH:mm:ssZ')}</p>
-      <p>Päeva pikkus: {data.length} minut(it)</p>
-    </div>
+  {#if showRange}
+    <Graph />
+  {:else}
+    <Info {...data} />
   {/if}
 </div>
 
