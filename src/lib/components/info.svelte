@@ -15,7 +15,7 @@
 </script>
 
 <div>
-  <p>Päikesetõus: {data.sunrise.format('HH:mm:ss')}</p>
-  <p>Päikeseloojang: {data.sunset.format('HH:mm:ss')}</p>
-  <p>Päeva pikkus: {data.length} minut(it)</p>
+  <p>Sunrise: {data.sunrise.format('HH:mm:ss')}</p>
+  <p>Sunset: {data.sunset.format('HH:mm:ss')}</p>
+  <p>Length of day: {data.length} minute(s)</p>
 </div>

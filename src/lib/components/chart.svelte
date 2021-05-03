@@ -19,22 +19,22 @@
     lng,
     timezone
   ).map((val) => ({
-    group: 'Päeva pikkus',
+    group: 'Length of day',
     date: val.date.toString(),
     value: val.length,
   })); // Some magic to map the data to expected format
 
   const options = {
-    title: 'Päevade pikkus',
+    title: 'Length of days',
     axes: {
       bottom: {
-        title: 'Kuupäev',
+        title: 'Date',
         mapsTo: 'date',
         scaleType: 'time',
       },
       left: {
         mapsTo: 'value',
-        title: 'Päeva pikkus (min)',
+        title: 'Length of day (min)',
         scaleType: 'linear',
       },
     },
