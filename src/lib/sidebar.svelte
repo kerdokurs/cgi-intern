@@ -31,7 +31,7 @@
 
 <div
   class="w-full h-screen lg:w-2/5 lg:relative py-20 px-4 bg-white {$sidebarOpen
-    ? 'flex absolute left-0 z-10'
+    ? 'w-screen lg:w-full flex absolute left-0 z-10'
     : 'hidden lg:flex'} flex-col gap-4"
 >
   <h1 class="text-2xl font-bold">Päeva pikkuse kalkulaator</h1>
