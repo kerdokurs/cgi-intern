@@ -12,8 +12,8 @@
   export let lng: number;
 
   let showRange: boolean = false;
-  let startDate: number = new Date().getTime();
-  let endDate: number = new Date().getTime();
+  let startDate: number = 0;
+  let endDate: number = -1;
 
   let dateError: boolean;
   $: dateError = endDate < startDate;
@@ -90,7 +90,7 @@
     </button>
   </div>
 
-  {#if showRange && startDate && endDate}
+  {#if showRange && !dateError}
     <Chart bind:lng bind:lat {startDate} {endDate} bind:timezone />
   {:else}
     <Info bind:lng bind:lat bind:date={startDate} bind:timezone />
