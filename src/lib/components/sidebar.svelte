@@ -15,6 +15,9 @@
   let startDate: number = new Date().getTime();
   let endDate: number = new Date().getTime();
 
+  let dateError: boolean;
+  $: dateError = endDate < startDate;
+
   let timezone: Timezone = timezones[0];
 
   // "Go to" handler - going to be notifying to move the map
@@ -33,15 +36,27 @@
     <div class="text-left grid grid-cols-2 gap-2">
       <label for="start"> {showRange ? 'Algk' : 'K'}uupäev </label>
       <input
-        type="datetime-local"
+        type="date"
         name="start"
         id="start"
+        class="w-auto"
         bind:value={startDate}
       />
 
       {#if showRange}
         <label for="end"> Lõppkuupäev </label>
-        <input type="datetime-local" name="end" id="end" bind:value={endDate} />
+        <input
+          type="date"
+          name="end"
+          id="end"
+          class="w-auto"
+          bind:value={endDate}
+        />
+        {#if dateError}
+          <p class="col-span-2 text-xs text-red-800 text-right">
+            Vale lõpukuupäev
+          </p>
+        {/if}
       {/if}
 
       <p class="col-span-2 text-right text-xs">
@@ -75,7 +90,7 @@
     </button>
   </div>
 
-  {#if showRange}
+  {#if showRange && startDate && endDate}
     <Chart bind:lng bind:lat {startDate} {endDate} bind:timezone />
   {:else}
     <Info bind:lng bind:lat bind:date={startDate} bind:timezone />
