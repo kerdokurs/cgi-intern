@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import type Timezone from '../interfaces/Timezone';
-  import { sidebarOpen } from '../store/state';
+  import { mapHasLoaded, sidebarOpen } from '../store/state';
   import timezones from '../timezones';
   import Chart from './chart.svelte';
   import Info from './info.svelte';
@@ -12,7 +12,7 @@
   export let lng: number;
 
   let showRange: boolean = false;
-  let startDate: number = 0;
+  let startDate: number = new Date().getTime();
   let endDate: number = -1;
 
   let dateError: boolean;
@@ -22,6 +22,22 @@
 
   // "Go to" handler - going to be notifying to move the map
   const go = () => dispatch('go', { lat, lng });
+
+  // Defaulting to the current geolocation after the map has loaded
+  $: $mapHasLoaded && getCurrentLocation();
+
+  const getCurrentLocation = () => {
+    // Getting the current geolocation from the navigator if
+    // the user has given permission
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude, longitude } = pos.coords;
+        lat = latitude;
+        lng = longitude;
+        go();
+      });
+    }
+  };
 </script>
 
 <div

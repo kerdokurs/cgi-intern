@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { mapbox } from '../mapbox';
+  import { mapHasLoaded } from '../store/state';
 
   let container: HTMLElement;
   let map: mapbox.Map;
@@ -40,6 +41,8 @@
 
         updateMarker();
       });
+
+      mapHasLoaded.set(true);
     };
 
     document.head.appendChild(link);
