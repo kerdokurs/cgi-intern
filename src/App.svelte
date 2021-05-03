@@ -5,17 +5,20 @@
   let lat: number = 0;
   let lng: number = 0;
 
-  // Map click handler
-  const onClick = (e: any) => {
+  let updateMap: boolean = false;
+
+  const onGo = (e: any) => {
     const { lng: _lng, lat: _lat } = e.detail;
     lat = _lat;
     lng = _lng;
+
+    updateMap = true;
   };
 </script>
 
-<main class="text-center w-screen h-screen grid grid-cols-12">
-  <Map on:click={onClick} />
-  <Sidebar bind:lat bind:lng />
+<main class="w-screen h-screen flex flex-row">
+  <Sidebar on:go={onGo} bind:lat bind:lng />
+  <Map bind:lat bind:lng bind:update={updateMap} />
 </main>
 
 <style lang="postcss">

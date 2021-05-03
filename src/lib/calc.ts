@@ -1,7 +1,11 @@
 // @ts-ignore
 import SunCalc from 'suncalc';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import type Data from './Data';
+import type Timezone from './Timezone';
+
+dayjs.extend(utc);
 
 /**
  * Calculates sunrise, sunset and the length of day.
@@ -11,15 +15,20 @@ import type Data from './Data';
  * @param lng position longitude
  * @returns sun times and day length
  */
-export const calculate = (date: Date, lat: number, lng: number): Data => {
+export const calculate = (
+  date: Date,
+  lat: number,
+  lng: number,
+  timezone: Timezone
+): Data => {
   const { sunrise: _sunrise, sunset: _sunset } = SunCalc.getTimes(
     date,
     lat,
     lng
   );
 
-  const sunrise = dayjs(_sunrise);
-  const sunset = dayjs(_sunset);
+  const sunrise = dayjs.utc(_sunrise).utcOffset(timezone.offset);
+  const sunset = dayjs.utc(_sunset).utcOffset(timezone.offset);
   const length = sunset.diff(sunrise, 'minutes');
 
   return {
@@ -42,7 +51,8 @@ export const calculateRange = (
   start: Date,
   end: Date,
   lat: number,
-  lng: number
+  lng: number,
+  timezone: Timezone
 ): Data[] => {
   const data: Data[] = [];
 
@@ -51,7 +61,7 @@ export const calculateRange = (
     current <= end;
     current.setDate(current.getDate() + 1)
   )
-    data.push(calculate(current, lat, lng));
+    data.push(calculate(current, lat, lng, timezone));
 
   return data;
 };
