@@ -12,6 +12,7 @@
   export let lat: number;
   export let lng: number;
 
+  let showRange: boolean = false;
   let startDate: number = new Date().getTime();
 
   let timezone: Timezone = timezones[0];
@@ -32,13 +33,32 @@
 
   <form on:submit|preventDefault={go}>
     <div class="text-left grid grid-cols-2 gap-2">
-      <label for="start"> Laiuskraad </label>
+      <label for="start"> {showRange ? 'Algk' : 'K'}uupäev </label>
       <input
         type="datetime-local"
         name="start"
         id="start"
         bind:value={startDate}
       />
+
+      {#if showRange}
+        <label for="end"> Lõppkuupäev </label>
+        <input
+          type="datetime-local"
+          name="end"
+          id="end"
+          bind:value={startDate}
+        />
+      {/if}
+
+      <p class="col-span-2 text-right text-xs">
+        <button
+          class="outline-none focus:outline-none text-indigo-800"
+          on:click|preventDefault={() => (showRange = !showRange)}
+        >
+          {showRange ? 'Sulge' : 'Ava'} vahemik
+        </button>
+      </p>
 
       <label for="lat"> Laiuskraad </label>
       <input type="number" name="lat" id="lat" bind:value={lat} />
