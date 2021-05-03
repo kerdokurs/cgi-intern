@@ -6,6 +6,7 @@
   import Info from './info.svelte';
   import type Timezone from './Timezone';
   import timezones from './timezones';
+  import { sidebarOpen } from './store/state';
 
   const dispatch = createEventDispatcher();
 
@@ -28,7 +29,11 @@
   };
 </script>
 
-<div class="w-2/5 py-20 px-4 flex flex-col gap-4">
+<div
+  class="w-full h-screen lg:w-2/5 lg:relative py-20 px-4 bg-white {$sidebarOpen
+    ? 'flex absolute left-0 z-10'
+    : 'hidden lg:flex'} flex-col gap-4"
+>
   <h1 class="text-2xl font-bold">Päeva pikkuse kalkulaator</h1>
   <h2 class="text-lg">Sisesta koordinaadid või vali asukoht kaardilt</h2>
 

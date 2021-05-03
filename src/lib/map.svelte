@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { mapbox } from './mapbox';
   import { createEventDispatcher } from 'svelte';
+  import { sidebarOpen } from './store/state';
 
   const dispatch = createEventDispatcher();
 

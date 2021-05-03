@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MNav from './lib/m-nav.svelte';
   import Map from './lib/map.svelte';
   import Sidebar from './lib/sidebar.svelte';
 
@@ -27,6 +28,7 @@
   <Sidebar on:go={onGo} bind:lat bind:lng />
   <Map bind:lat bind:lng bind:update={updateMap} />
 </main>
+<MNav />
 
 <style lang="postcss">
   @tailwind base;
