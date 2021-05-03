@@ -1,15 +1,22 @@
+// Class for generating and handling Timezones
 export default class Timezone {
   private _name: string;
 
+  /**
+   * Timezone
+   *
+   * @param _offset timezone offset
+   */
   constructor(private _offset: number) {
     this._offset = _offset;
     this._name = this.formatTime(_offset);
   }
 
   /**
+   * Method for formatting a number to 2 digits.
    *
-   * @param n
-   * @returns
+   * @param n number
+   * @returns formatted number
    */
   private formatNumber = (n: number): string =>
     n > 9 ? n.toString() : '0' + n;

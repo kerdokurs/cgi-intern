@@ -1,12 +1,10 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { calculate } from './calc';
-  import type Data from './Data';
+  import type Timezone from '../interfaces/Timezone';
+  import { sidebarOpen } from '../store/state';
+  import timezones from '../timezones';
   import Chart from './chart.svelte';
   import Info from './info.svelte';
-  import type Timezone from './Timezone';
-  import timezones from './timezones';
-  import { sidebarOpen } from './store/state';
 
   const dispatch = createEventDispatcher();
 
@@ -19,14 +17,8 @@
 
   let timezone: Timezone = timezones[0];
 
-  let data: Data;
-  $: {
-    startDate && (data = calculate(new Date(startDate), lat, lng, timezone));
-  }
-
-  const go = () => {
-    dispatch('go', { lat, lng });
-  };
+  // "Go to" handler - going to be notifying to move the map
+  const go = () => dispatch('go', { lat, lng });
 </script>
 
 <div
@@ -37,7 +29,7 @@
   <h1 class="text-2xl font-bold">Päeva pikkuse kalkulaator</h1>
   <h2 class="text-lg">Sisesta koordinaadid või vali asukoht kaardilt</h2>
 
-  <form on:submit|preventDefault={go}>
+  <div>
     <div class="text-left grid grid-cols-2 gap-2">
       <label for="start"> {showRange ? 'Algk' : 'K'}uupäev </label>
       <input
@@ -75,17 +67,18 @@
       </select>
     </div>
     <button
-      type="submit"
+      type="button"
       class="mt-2 px-6 py-2 bg-indigo-600 hover:bg-indigo-800 text-white font-semibold"
+      on:click={go}
     >
-      Mine
+      Mine asukohta
     </button>
-  </form>
+  </div>
 
   {#if showRange}
     <Chart bind:lng bind:lat {startDate} {endDate} bind:timezone />
   {:else}
-    <Info {...data} />
+    <Info bind:lng bind:lat bind:date={startDate} bind:timezone />
   {/if}
 </div>
 

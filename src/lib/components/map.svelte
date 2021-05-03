@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { mapbox } from './mapbox';
+  import { mapbox } from '../mapbox';
 
   let container: HTMLElement;
   let map: mapbox.Map;
@@ -11,9 +11,11 @@
 
   export let update: boolean = false;
 
+  // If we should update the marker, update
   $: update && updateMarker();
 
   onMount(() => {
+    // Setting up mapbox
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://unpkg.com/mapbox-gl/dist/mapbox-gl.css';
@@ -25,8 +27,10 @@
         center: [0, 0],
         zoom: 3.5,
       });
+      // Map controls
       map.addControl(new mapbox.NavigationControl());
 
+      // Map click handler
       map.on('click', (e) => {
         const {
           lngLat: { lng: _lng, lat: _lat },
@@ -41,6 +45,7 @@
     document.head.appendChild(link);
 
     return () => {
+      // Disposing the map
       map && map.remove();
       link?.parentNode?.removeChild(link);
     };

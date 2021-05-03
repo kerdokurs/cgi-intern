@@ -12,4 +12,4 @@ ETAPP3:
     ✘ Svelte datetime picker @cancelled(21-05-03 16:45)
   graafik:
     ✔ API, millele sobib kuupäevade vahemik @done(21-05-03 10:42)
-    ☐ graafiku joonistamine (D3, Google Charts, ChartJS vmt?)
+    ✔ graafiku joonistamine (D3, Google Charts, ChartJS vmt?) @done(21-05-03 19:55)

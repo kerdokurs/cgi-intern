@@ -1,13 +1,14 @@
 <script lang="ts">
-  import MNav from './lib/m-nav.svelte';
-  import Map from './lib/map.svelte';
-  import Sidebar from './lib/sidebar.svelte';
+  import MNav from './lib/components/m-nav.svelte';
+  import Map from './lib/components/map.svelte';
+  import Sidebar from './lib/components/sidebar.svelte';
 
   let lat: number = 0;
   let lng: number = 0;
 
   let updateMap: boolean = false;
 
+  // Handler for "go to" event from sidebar
   const onGo = (e: any) => {
     const { lng: _lng, lat: _lat } = e.detail;
     lat = _lat;
@@ -31,6 +32,7 @@
 <MNav />
 
 <style lang="postcss">
+  /* Tailwind setup */
   @tailwind base;
   @tailwind components;
   @tailwind utilities;

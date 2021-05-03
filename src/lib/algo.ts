@@ -2,8 +2,8 @@
 import SunCalc from 'suncalc';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import type Data from './Data';
-import type Timezone from './Timezone';
+import type Data from './interfaces/Data';
+import type Timezone from './interfaces/Timezone';
 
 dayjs.extend(utc);
 
@@ -21,6 +21,8 @@ export const calculate = (
   lng: number,
   timezone: Timezone
 ): Data => {
+  // Using this library to calculate the times.
+  // Precision should always be in the range of +-5 minutes.
   const { sunrise: _sunrise, sunset: _sunset } = SunCalc.getTimes(
     date,
     lat,
@@ -35,7 +37,7 @@ export const calculate = (
     sunrise,
     sunset,
     length,
-    date: new Date(date),
+    date: new Date(date), // Copying the date
   };
 };
 
@@ -61,9 +63,8 @@ export const calculateRange = (
     const current = start;
     current <= end;
     current.setDate(current.getDate() + 1)
-  ) {
+  )
     data.push(calculate(current, lat, lng, timezone));
-  }
 
   return data;
 };

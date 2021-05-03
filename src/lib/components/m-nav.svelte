@@ -1,5 +1,7 @@
 <script>
-  import { sidebarOpen } from './store/state';
+  import { sidebarOpen } from '../store/state';
+  // Mobile navigation button for opening and closing the
+  // fullscreen sidebar.
 </script>
 
 <div class="block lg:hidden absolute left-0 top-0 p-4 z-20">

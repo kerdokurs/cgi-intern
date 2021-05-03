@@ -1,7 +1,7 @@
 <script lang="ts">
   import { LineChart } from '@carbon/charts-svelte';
-  import { calculateRange } from './calc';
-  import type Timezone from './Timezone';
+  import { calculateRange } from '../algo';
+  import type Timezone from '../interfaces/Timezone';
 
   export let lat: number;
   export let lng: number;
@@ -9,24 +9,20 @@
   export let endDate: number;
   export let timezone: Timezone;
 
-  export let modalOpen: boolean;
-
   export let height: number = 400;
 
   let data: any[] = [];
-  $: {
-    data = calculateRange(
-      new Date(startDate),
-      new Date(endDate),
-      lat,
-      lng,
-      timezone
-    ).map((val) => ({
-      group: 'Päeva pikkus',
-      date: val.date.toString(),
-      value: val.length,
-    }));
-  }
+  $: data = calculateRange(
+    new Date(startDate),
+    new Date(endDate),
+    lat,
+    lng,
+    timezone
+  ).map((val) => ({
+    group: 'Päeva pikkus',
+    date: val.date.toString(),
+    value: val.length,
+  })); // Some magic to map the data to expected format
 
   const options = {
     title: 'Päevade pikkus',
@@ -47,9 +43,3 @@
 </script>
 
 <LineChart {data} {options} />
-<p class="text-right text-xs">
-  <button
-    class="outline-none focus:outline-none text-indigo-800"
-    on:click={() => (modalOpen = !modalOpen)}>Vaata suuremalt</button
-  >
-</p>

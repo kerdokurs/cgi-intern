@@ -1,4 +1,4 @@
-import Timezone from './Timezone';
+import Timezone from './interfaces/Timezone';
 
 // Generating timezones
 export default [...Array(27).keys()]
